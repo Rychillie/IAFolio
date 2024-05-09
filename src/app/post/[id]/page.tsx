@@ -1,6 +1,6 @@
+import { Container, CustomLink } from '@/components'
 import e from '@/dbschema/edgeql-js'
 import { createClient } from 'edgedb'
-import Link from 'next/link'
 
 const client = createClient()
 
@@ -19,14 +19,14 @@ export default async function Post({ params }: { params: { id: string } }) {
 	}
 
 	return (
-		<div className='container mx-auto p-4'>
+		<Container>
 			<nav>
-				<Link href='/' className='text-blue-500 mb-4 block' replace>
+				<CustomLink href='/' replace>
 					Back to list
-				</Link>
+				</CustomLink>
 			</nav>
 			<h1 className='text-3xl font-bold mb-4'>{post.title}</h1>
 			<p>{post.content}</p>
-		</div>
+		</Container>
 	)
 }

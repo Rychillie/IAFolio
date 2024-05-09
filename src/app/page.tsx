@@ -1,6 +1,6 @@
+import { Container, CustomLink } from '@/components'
 import e from '@/dbschema/edgeql-js'
 import { createClient } from 'edgedb'
-import Link from 'next/link'
 
 const client = createClient()
 
@@ -13,17 +13,19 @@ export default async function Home() {
 	const posts = await selectPosts.run(client)
 
 	return (
-		<div className='container mx-auto p-4'>
+		<Container>
 			<h1 className='text-3xl font-bold mb-4'>Posts</h1>
-			<ul>
-				{posts.map(post => (
-					<li key={post.id} className='mb-4'>
-						<Link href={`/post/${post.id}`} className='text-blue-500'>
-							{post.title}
-						</Link>
-					</li>
-				))}
-			</ul>
-		</div>
+			{posts.length === 0 ? (
+				<p>No posts found.</p>
+			) : (
+				<ul>
+					{posts.map(post => (
+						<li key={post.id} className='mb-4'>
+							<CustomLink href={`/post/${post.id}`}>{post.title}</CustomLink>
+						</li>
+					))}
+				</ul>
+			)}
+		</Container>
 	)
 }

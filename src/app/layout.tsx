@@ -19,10 +19,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html
 			lang='en'
-			className={c('scroll-smooth antialiased', GeistMono.variable, GeistSans.variable)}
+			className={c('scroll-smooth antialiased flex w-full h-full', GeistMono.variable, GeistSans.variable)}
 			suppressHydrationWarning
 		>
-			<body className='overflow-x-hidden text-sm text-primary dark:bg-primary dark:text-primary-dark md:text-base lg:text-base'>
+			<body className='overflow-x-hidden text-sm  flex w-full h-full text-primary dark:bg-primary dark:text-primary-dark md:text-base lg:text-base'>
 				<Providers>{children}</Providers>
 			</body>
 		</html>

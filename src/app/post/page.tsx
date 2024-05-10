@@ -1,22 +1,14 @@
-import { Container, CustomLink } from '@/components';
-import e from '@/dbschema/edgeql-js';
-import { createClient } from 'edgedb';
-
-const client = createClient();
+import { getPosts } from '@/actions/post';
+import { Container, CustomLink, Heading, Text } from '@/components';
 
 export default async function Post() {
-  const selectPosts = e.select(e.BlogPost, () => ({
-    id: true,
-    title: true,
-    content: true
-  }));
-  const posts = await selectPosts.run(client);
+  const posts = await getPosts();
 
   return (
     <Container>
-      <h1 className="mb-4 text-3xl font-bold">Posts</h1>
+      <Heading className="mb-4">Posts</Heading>
       {posts.length === 0 ? (
-        <p>No posts found.</p>
+        <Text>No posts found.</Text>
       ) : (
         <ul>
           {posts.map((post) => (

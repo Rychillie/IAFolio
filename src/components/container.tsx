@@ -5,7 +5,5 @@ type Props = {
 };
 
 export default function Container({ children }: Props) {
-  return (
-    <div className="mx-auto flex size-full max-w-3xl flex-col justify-end p-8">{children}</div>
-  );
+  return <div className="mx-auto flex size-full max-w-3xl flex-col p-8">{children}</div>;
 }

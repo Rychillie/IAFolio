@@ -1,18 +1,8 @@
-import { Container, CustomLink } from '@/components';
-import e from '@/dbschema/edgeql-js';
-import { createClient } from 'edgedb';
-
-const client = createClient();
+import { getPost } from '@/actions/post';
+import { Container, CustomLink, Heading, Text } from '@/components';
 
 export default async function Post({ params }: { params: { id: string } }) {
-  const post = await e
-    .select(e.BlogPost, (post) => ({
-      id: true,
-      title: true,
-      content: true,
-      filter_single: e.op(post.id, '=', e.uuid(params.id))
-    }))
-    .run(client);
+  const post = await getPost(params.id);
 
   if (!post) {
     return <div>Post not found</div>;
@@ -20,13 +10,13 @@ export default async function Post({ params }: { params: { id: string } }) {
 
   return (
     <Container>
-      <nav>
+      <nav className="mb-4">
         <CustomLink href="/" replace>
           Back to list
         </CustomLink>
       </nav>
-      <h1 className="mb-4 text-3xl font-bold">{post.title}</h1>
-      <p>{post.content}</p>
+      <Heading className="mb-4">{post.title}</Heading>
+      <Text>{post.content}</Text>
     </Container>
   );
 }
